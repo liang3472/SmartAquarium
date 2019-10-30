@@ -7,7 +7,7 @@ const TempHelper = {
     },
 
     getTemperature: () => {
-        return sensor.readC(deviceId);
+        return sensor.readC(this.sensorId);
     }
 }
 

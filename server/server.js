@@ -2,12 +2,14 @@
 const fs = require('fs');
 const ini = require('ini');
 const TempHelper = require('./components/tempHelper.js');
+const HornHelper = require('./components/hornHelper.js');
 const configPath = '../config.conf';
-const LOOP_TIME = 1 * 1000;
+const LOOP_TIME = 3 * 1000;
 let config;
 
 const manager = {
-    tempHelper: TempHelper
+    tempHelper: TempHelper,
+    hornHelper: HornHelper
 }
 
 console.log('检测配置文件');
@@ -25,5 +27,6 @@ setInterval(() => {
     if (manager.tempHelper) {
         let temp = manager.tempHelper.getTemperature();
         console.log(`curr temp ${temp}`);
+        //manager.hornHelper.horn(2, 200, 400); // 测试嗡鸣
     }
 }, LOOP_TIME);

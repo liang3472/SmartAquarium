@@ -1,4 +1,8 @@
 const sensor = require('ds18b20-raspi');
+
+/**
+ * 温度检测
+ */
 const TempHelper = {
     sensorId: '',
     init: id => {

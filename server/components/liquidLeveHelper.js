@@ -7,15 +7,15 @@ const LiquidLeveHelper = {
             manager = mng;
         }
     },
-    getLeve: callback => {
+    async getLeve: () => {
         if (!manager) {
             console.log('manager不存在');
             return;
         }
         let cmd = manager.cmdComp.exec('sudo python ./drives/PCF8591.py');
-        cmd.stdout.on('data', data => {
+        await cmd.stdout.on('data', data => {
             lastLeve = data;
-            callback && callback(data);
+            return data;
         });
     },
     getLastLeve: () => {

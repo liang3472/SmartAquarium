@@ -30,12 +30,9 @@ fs.exists(configPath, exists => {
 setInterval(() => {
     if (manager.tempHelper) {
         let temp = manager.tempHelper.getTemperature();
-        let cmd = manager.cmdHelper.exec('echo hahaha');
-        cmd.stdout.on('data', data => {
-            lastTemperature = data;
-            callback && callback(data);
-        });
         console.log(`curr temp ${temp}`);
+        let leve = manager.liquidLeveHelper.getLeve();
+        console.log(`curr leve ${leve}`);
         //manager.hornHelper.horn(2, 200, 400); // 测试嗡鸣
     }
 }, LOOP_TIME);

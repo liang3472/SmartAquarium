@@ -7,16 +7,26 @@ const LiquidLeveHelper = {
             manager = mng;
         }
     },
-    getLeve: asyn () => {
+    getLeve: () => {
         if (!manager) {
             console.log('manager不存在');
             return;
         }
-        let cmd = manager.cmdComp.exec('sudo python ./drives/PCF8591.py');
-        await cmd.stdout.on('data', data => {
-            lastLeve = data;
+        new Promise((resolve, reject) => {
+            try {
+                let cmd = manager.cmdComp.exec('sudo python ./drives/PCF8591.py');
+                cmd.stdout.on('data', data => {
+                    lastLeve = data;
+                    resolve(data);
+                });
+            } catch(e) {
+                reject(e);
+            }
+        }).then(data=>{
             return data;
-        });
+        }).catch((e)=>{
+            return null;
+        })
     },
     getLastLeve: () => {
         return lastLeve;

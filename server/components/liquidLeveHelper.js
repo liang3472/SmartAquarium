@@ -14,7 +14,7 @@ const LiquidLeveHelper = {
         }
         new Promise((resolve, reject) => {
             try {
-                let cmd = manager.cmdComp.exec('sudo python ./drives/PCF8591.py');
+                let cmd = manager.cmdComp.exec('sudo python3 ./drives/PCF8591.py');
                 cmd.stdout.on('data', data => {
                     lastLeve = data;
                     resolve(data);

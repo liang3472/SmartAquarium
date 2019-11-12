@@ -6,8 +6,8 @@ const sensor = require('ds18b20-raspi');
 const TempHelper = {
     sensorId: '',
     init: id => {
+        console.log('初始化TempHelper模块');
         this.sensorId = id;
-        console.log(id)
     },
 
     getTemperature: () => {

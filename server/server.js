@@ -3,13 +3,17 @@ const fs = require('fs');
 const ini = require('ini');
 const TempHelper = require('./components/tempHelper.js');
 const HornHelper = require('./components/hornHelper.js');
+const CmdHelper = require('./components/cmdHelper.js');
+const LiquidLeveHelper = require('./components/liquidLeveHelper.js');
 const configPath = '../config.conf';
 const LOOP_TIME = 3 * 1000;
 let config;
 
 const manager = {
     tempHelper: TempHelper,
-    hornHelper: HornHelper
+    hornHelper: HornHelper,
+    cmdHelper: CmdHelper,
+    liquidLeveHelper: LiquidLeveHelper
 }
 
 console.log('检测配置文件');
@@ -26,6 +30,11 @@ fs.exists(configPath, exists => {
 setInterval(() => {
     if (manager.tempHelper) {
         let temp = manager.tempHelper.getTemperature();
+        let cmd = manager.cmdHelper.exec('echo hahaha');
+        cmd.stdout.on('data', data => {
+            lastTemperature = data;
+            callback && callback(data);
+        });
         console.log(`curr temp ${temp}`);
         //manager.hornHelper.horn(2, 200, 400); // 测试嗡鸣
     }

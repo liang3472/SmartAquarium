@@ -17,7 +17,7 @@ const LiquidLeveHelper = {
                 let cmd = manager.cmdHelper.exec('python ./drives/PCF8591.py');
                 cmd.stdout.on('data', data => {
                     lastLeve = data;
-                    resolve(data);
+                    resolve(data / 25.0 * 8.0);
                 });
             } catch(e) {
                 reject(e);

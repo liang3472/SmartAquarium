@@ -7,7 +7,7 @@ const LiquidLeveHelper = {
             manager = mng;
         }
     },
-    async getLeve: () => {
+    getLeve: asyn () => {
         if (!manager) {
             console.log('manager不存在');
             return;

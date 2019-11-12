@@ -22,6 +22,7 @@ fs.exists(configPath, exists => {
         console.log('读取配置文件...');
         config = ini.parse(fs.readFileSync('../config.conf', 'utf-8'));
         manager.tempHelper.init(config.tempSensorId);
+        manager.liquidLeveHelper.init(manager);
     } else {
         console.log('缺少配置文件');
     }

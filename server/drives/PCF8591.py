@@ -58,4 +58,4 @@ class PCF8591:
 
 if __name__ == "__main__":
 	pcf8591 = PCF8591(0x48)
-    print(pcf8591.analogRead0()) #read the Variable register
+        print(pcf8591.analogRead0()) #read the Variable register

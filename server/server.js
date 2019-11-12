@@ -32,8 +32,9 @@ setInterval(() => {
     if (manager.tempHelper) {
         let temp = manager.tempHelper.getTemperature();
         console.log(`curr temp ${temp}`);
-        let leve = manager.liquidLeveHelper.getLeve();
-        console.log(`curr leve ${leve}`);
+        let leve = manager.liquidLeveHelper.getLeve().then(leve=>{
+            console.log(`curr leve ${leve}`);
+        });
         //manager.hornHelper.horn(2, 200, 400); // 测试嗡鸣
     }
 }, LOOP_TIME);

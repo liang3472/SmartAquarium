@@ -17,7 +17,7 @@ class LiquidLeveHelper {
                 let cmd = manager.cmdHelper.exec('python ./drives/PCF8591.py');
                 cmd.stdout.on('data', data => {
                     lastLeve = this.mappingLeve(data);
-                    resolve(data);
+                    resolve(lastLeve);
                 });
             } catch(e) {
                 reject(e);

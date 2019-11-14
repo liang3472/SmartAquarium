@@ -16,13 +16,38 @@ const LiquidLeveHelper = {
             try {
                 let cmd = manager.cmdHelper.exec('python ./drives/PCF8591.py');
                 cmd.stdout.on('data', data => {
-                    lastLeve = data;
+                    lastLeve = this.mappingLeve(data);
                     resolve(data);
                 });
             } catch(e) {
                 reject(e);
             }
         });
+    },
+    mappingLeve: (data)=> {
+        if(data === 0) {
+            return 0;
+        } else if(data > 0 && data <= 80) {
+            return 50;
+        } else if(data > 80 && data <= 96) {
+            return 100;
+        } else if(data > 96 && data <= 120) {
+            return 150;
+        } else if(data > 120 && data <= 135) {
+            return 200;
+        } else if(data > 135 && data <= 138) {
+            return 250;
+        } else if(data > 138 && data <= 143) {
+            return 300;
+        } else if(data > 143 && data <= 147) {
+            return 350;
+        } else if(data > 147 && data <= 150) {
+            return 400;
+        } else if(data > 150 && data <= 151) {
+            return 450;
+        } else {
+            return 480;
+        }
     },
     getLastLeve: () => {
         return lastLeve;

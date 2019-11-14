@@ -16,7 +16,10 @@ class LiquidLeveHelper {
             try {
                 let cmd = manager.cmdHelper.exec('python ./drives/PCF8591.py');
                 cmd.stdout.on('data', data => {
-                    lastLeve = this.mappingLeve(data);
+                    if(+data < 0) {
+                        reject(new Error('sensor error!'));
+                    }
+                    lastLeve = this.mappingLeve(+data);
                     resolve(lastLeve);
                 });
             } catch(e) {

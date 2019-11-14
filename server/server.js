@@ -10,10 +10,10 @@ const LOOP_TIME = 3 * 1000;
 let config;
 
 const manager = {
-    tempHelper: TempHelper,
-    hornHelper: HornHelper,
-    cmdHelper: CmdHelper,
-    liquidLeveHelper: LiquidLeveHelper
+    tempHelper: new TempHelper(),
+    hornHelper: new HornHelper(),
+    cmdHelper: new CmdHelper(),
+    liquidLeveHelper: new LiquidLeveHelper()
 }
 
 console.log('检测配置文件');

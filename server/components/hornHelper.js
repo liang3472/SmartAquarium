@@ -5,8 +5,8 @@ rpio.open(hornPin, rpio.OUTPUT, rpio.LOW);
 /**
  * 嗡鸣
  */
-const HornHelper = {
-    horn: (count, time=500, delay=1000) => {
+class HornHelper {
+    horn(count, time=500, delay=1000) {
         for(let i=0; i<count; i++) {
             setTimeout(()=>{
                 rpio.write(hornPin, rpio.HIGH);

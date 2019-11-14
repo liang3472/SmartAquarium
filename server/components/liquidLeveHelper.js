@@ -1,13 +1,13 @@
 let manager;
 let lastLeve = 0;
-const LiquidLeveHelper = {
-    init: mng => {
+class LiquidLeveHelper {
+    init(mng) {
         console.log('初始化LiquidLeve模块');
         if (mng) {
             manager = mng;
         }
-    },
-    getLeve: () => {
+    }
+    getLeve() {
         if (!manager) {
             console.log('manager不存在');
             return;
@@ -23,8 +23,8 @@ const LiquidLeveHelper = {
                 reject(e);
             }
         });
-    },
-    mappingLeve: (data)=> {
+    }
+    mappingLeve(data) {
         if(data === 0) {
             return 0;
         } else if(data > 0 && data <= 80) {
@@ -48,8 +48,8 @@ const LiquidLeveHelper = {
         } else {
             return 480;
         }
-    },
-    getLastLeve: () => {
+    }
+    getLastLeve() {
         return lastLeve;
     }
 }

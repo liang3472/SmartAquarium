@@ -85,8 +85,8 @@ class MqttHelper {
 
     startWatchLevel() {
         console.log('开始监控水位变化');
-        let loop = setInterval(() => {
-            let watch = this.manager.liquidLevelHelper.getLevel().then(level=>{
+        let watch = setInterval(() => {
+            this.manager.liquidLevelHelper.getLevel().then(level=>{
                 console.log(`当前水位:${level}`);
                 if(+leve >= 300) {
                     console.log('水位超标');

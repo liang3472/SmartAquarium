@@ -78,9 +78,10 @@ class MqttHelper {
             this.manager.relayHelper.switchPump(true);
             // 防止加水溢出风险
             setTimeout(()=>{
+                console.log('加水超时');
                 this.manager.relayHelper.switchPump(false);
                 this.stopWatchLevel();
-            }, 3000);
+            }, 5000);
         }
     }
 

@@ -23,6 +23,7 @@ class LiquidLeveHelper {
                     resolve(lastLevel);
                 });
             } catch(e) {
+                console.log(e);
                 reject(e);
             }
         });

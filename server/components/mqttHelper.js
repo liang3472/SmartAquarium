@@ -88,7 +88,7 @@ class MqttHelper {
         let watch = setInterval(() => {
             this.manager.liquidLevelHelper.getLevel().then(level=>{
                 console.log(`当前水位:${level}`);
-                if(+leve >= 300) {
+                if(+level >= 300) {
                     console.log('水位超标');
                     this.manager.relayHelper.switchPump(false);
                     clearInterval(watch);

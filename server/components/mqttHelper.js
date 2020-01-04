@@ -35,9 +35,10 @@ class MqttHelper {
 
         mqttClient.on('message', (topic, data) => {
             let {commend, action} = JSON.parse(data.toString());
+            console.log(`remote cmd: ${commend}`);
             switch (commend) {
                 case CMD_ADD_WATER:
-                    console.log('加水ing...');
+                    console.log('请求加水操作');
                     this.checkLiquidLevel();
                     break;
                 default:

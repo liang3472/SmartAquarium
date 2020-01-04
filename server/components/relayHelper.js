@@ -12,7 +12,7 @@ rpio.open(CH3, rpio.OUTPUT, rpio.LOW);
  */
 class RelayHelper {
     constructor() {
-        this.isPumpRun = false;
+        this._isPumpRun = false;
     }
 
     init() {
@@ -24,7 +24,7 @@ class RelayHelper {
      * @param flag true | false 打开or关闭
      */
     switchPump(flag) {
-        this.isPumpRun = flag;
+        this._isPumpRun = flag;
         if(flag) {
             console.log('开启水泵');
             rpio.write(CH1, rpio.HIGH);
@@ -38,7 +38,7 @@ class RelayHelper {
      * 水泵运行状态
      */
     isPumpRun() {
-        return this.isPumpRun;
+        return this._isPumpRun;
     }
 }
 

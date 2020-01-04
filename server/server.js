@@ -6,7 +6,7 @@ const TempHelper = require('./components/tempHelper.js');
 const RelayHelper = require('./components/relayHelper.js');
 const HornHelper = require('./components/hornHelper.js');
 const CmdHelper = require('./components/cmdHelper.js');
-const LiquidLeveHelper = require('./components/liquidLeveHelper.js');
+const LiquidLevelHelper = require('./components/liquidLeveHelper.js');
 const configPath = '../config.conf';
 const LOOP_TIME = 3 * 1000;
 let config;
@@ -17,7 +17,7 @@ const manager = {
     relayHelper: new RelayHelper(),
     hornHelper: new HornHelper(),
     cmdHelper: new CmdHelper(),
-    liquidLeveHelper: new LiquidLeveHelper()
+    liquidLevelHelper: new LiquidLevelHelper()
 }
 
 console.log('检测配置文件');
@@ -27,7 +27,7 @@ fs.exists(configPath, exists => {
         config = ini.parse(fs.readFileSync('../config.conf', 'utf-8'));
         manager.mqttHelper.init(config.mqttServer, manager);
         manager.tempHelper.init(config.tempSensorId);
-        manager.liquidLeveHelper.init(manager);
+        manager.liquidLevelHelper.init(manager);
     } else {
         console.log('缺少配置文件');
     }
@@ -37,15 +37,8 @@ setInterval(() => {
     if (manager.tempHelper) {
         let temp = manager.tempHelper.getTemperature();
         console.log(`curr temp ${temp}`);
-        let leve = manager.liquidLeveHelper.getLeve().then(leve=>{
-            console.log(`curr leve ${leve}`);
-            if(+leve >= 300) {
-                console.log('水位超标');
-                manager.relayHelper.switchPump(false);
-            }
-        }).catch(e=>{
-            console.log('水位传感器异常');
-            manager.relayHelper.switchPump(false);
+        let leve = manager.liquidLevelHelper.getLevel().then(level=>{
+            console.log(`curr leve ${level}`);
         });
         //manager.hornHelper.horn(2, 200, 400); // 测试嗡鸣
     }

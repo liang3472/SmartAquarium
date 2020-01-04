@@ -1,5 +1,5 @@
 let manager;
-let lastLeve = 0;
+let lastLevel = 0;
 class LiquidLeveHelper {
     init(mng) {
         console.log('初始化LiquidLeve模块');
@@ -7,7 +7,7 @@ class LiquidLeveHelper {
             manager = mng;
         }
     }
-    getLeve() {
+    getLevel() {
         if (!manager) {
             console.log('manager不存在');
             return;
@@ -19,15 +19,15 @@ class LiquidLeveHelper {
                     if(+data < 0) {
                         reject(new Error('sensor error!'));
                     }
-                    lastLeve = this.mappingLeve(+data);
-                    resolve(lastLeve);
+                    lastLeve = this.mappingLevel(+data);
+                    resolve(lastLevel);
                 });
             } catch(e) {
                 reject(e);
             }
         });
     }
-    mappingLeve(data) {
+    mappingLevel(data) {
         if(data === 0) {
             return 0;
         } else if(data > 0 && data <= 80) {
@@ -52,8 +52,8 @@ class LiquidLeveHelper {
             return 480;
         }
     }
-    getLastLeve() {
-        return lastLeve;
+    getLastLevel() {
+        return lastLevel;
     }
 }
 

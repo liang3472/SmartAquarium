@@ -11,6 +11,10 @@ rpio.open(CH3, rpio.OUTPUT, rpio.LOW);
  * 嗡鸣
  */
 class RelayHelper {
+    constructor() {
+        this.isPumpRun = false;
+    }
+
     init() {
         console.log('初始化RelayHelper模块');
     }
@@ -20,6 +24,7 @@ class RelayHelper {
      * @param flag true | false 打开or关闭
      */
     switchPump(flag) {
+        this.isPumpRun = flag;
         if(flag) {
             console.log('开启水泵');
             rpio.write(CH1, rpio.HIGH);
@@ -27,6 +32,13 @@ class RelayHelper {
             console.log('关闭水泵');
             rpio.write(CH1, rpio.LOW);
         }
+    }
+
+    /**
+     * 水泵运行状态
+     */
+    isPumpRun() {
+        return this.isPumpRun;
     }
 }
 

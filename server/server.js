@@ -25,7 +25,7 @@ fs.exists(configPath, exists => {
     if (exists) {
         console.log('读取配置文件...');
         config = ini.parse(fs.readFileSync('../config.conf', 'utf-8'));
-        manager.mqttHelper.init(config.mqttServer);
+        manager.mqttHelper.init(config.mqttServer, manager);
         manager.tempHelper.init(config.tempSensorId);
         manager.liquidLeveHelper.init(manager);
     } else {

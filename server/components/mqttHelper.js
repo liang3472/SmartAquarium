@@ -54,3 +54,5 @@ class MqttHelper {
         });
     }
 }
+
+module.exports = MqttHelper;

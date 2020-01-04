@@ -102,7 +102,6 @@ class MqttHelper {
                 this.stopWatchLevel();
             });
         }, 200);
-        return watch;
     }
 
     /**

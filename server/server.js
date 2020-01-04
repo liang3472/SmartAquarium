@@ -41,11 +41,11 @@ setInterval(() => {
             console.log(`curr leve ${leve}`);
             if(+leve >= 300) {
                 console.log('水位超标');
-                manager.relayHelper.switchPumb(false);
+                manager.relayHelper.switchPump(false);
             }
         }).catch(e=>{
             console.log('水位传感器异常');
-            manager.relayHelper.switchPumb(false);
+            manager.relayHelper.switchPump(false);
         });
         //manager.hornHelper.horn(2, 200, 400); // 测试嗡鸣
     }

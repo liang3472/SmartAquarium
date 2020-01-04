@@ -34,10 +34,11 @@ class MqttHelper {
         });
 
         mqttClient.on('message', (topic, data) => {
-            let msg = JSON.parse(data.toString());
-            switch (msg.commend) {
+            let {commend, action} = JSON.parse(data.toString());
+            switch (commend) {
                 case CMD_ADD_WATER:
-                    console.log('加水...');
+                    console.log('加水ing...');
+                    manager.relayHelper.switchPump(action);
                     break;
                 default:
                     console.log('unknow commend');

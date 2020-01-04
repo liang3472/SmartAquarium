@@ -1,4 +1,3 @@
-const RandomString = require('randomstring');
 const mqtt = require('mqtt');
 
 const CMD_ADD_WATER = 'CMD_ADD_WATER';
@@ -74,33 +73,45 @@ class MqttHelper {
         if(this.manager.relayHelper.isPumpRun()) {
             console.log('水泵运行中...');
         } else {
-            this.startWatchLevel();
+            console.log('开始监控水位变化');
+            let watch = this.startWatchLevel();
             this.manager.relayHelper.switchPump(true);
             // 防止加水溢出风险
             setTimeout(()=>{
                 this.manager.relayHelper.switchPump(false);
+                this.stopWatchLevel();
             }, 3000);
         }
     }
 
+    /**
+     * 开始监控水位变化
+     */
     startWatchLevel() {
-        console.log('开始监控水位变化');
-        let watch = setInterval(() => {
+        this.watch = setInterval(() => {
             this.manager.liquidLevelHelper.getLevel().then(level=>{
                 console.log(`当前水位:${level}`);
                 if(+level >= 300) {
                     console.log('水位超标');
                     this.manager.relayHelper.switchPump(false);
-                    clearInterval(watch);
-                    console.log('停止监控水位变化');
+                    this.stopWatchLevel();
                 }
             }).catch(e=>{
                 console.log('水位传感器异常');
                 this.manager.relayHelper.switchPump(false);
-                clearInterval(watch);
-                console.log('停止监控水位变化');
+                this.stopWatchLevel();
             });
         }, 200);
+        return watch;
+    }
+
+    /**
+     * 停止监控水位变化
+     */
+    stopWatchLevel() {
+        clearInterval(this.watch);
+        console.log('停止监控水位变化');
+        this.watch = null;
     }
 }
 

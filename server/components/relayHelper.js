@@ -21,8 +21,10 @@ class RelayHelper {
      */
     switchPump(flag) {
         if(flag) {
+            console.log('开启水泵');
             rpio.write(CH1, rpio.HIGH);
         }else {
+            console.log('关闭水泵');
             rpio.write(CH1, rpio.LOW);
         }
     }

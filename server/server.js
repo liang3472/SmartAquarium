@@ -39,6 +39,13 @@ setInterval(() => {
         console.log(`curr temp ${temp}`);
         let leve = manager.liquidLeveHelper.getLeve().then(leve=>{
             console.log(`curr leve ${leve}`);
+            if(+leve >= 300) {
+                console.err('水位超标');
+                manager.relayHelper.switchPumb(false);
+            }
+        }).catch(e=>{
+            console.err('水位传感器异常');
+            manager.relayHelper.switchPumb(false);
         });
         //manager.hornHelper.horn(2, 200, 400); // 测试嗡鸣
     }

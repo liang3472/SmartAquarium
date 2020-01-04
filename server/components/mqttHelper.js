@@ -38,7 +38,15 @@ class MqttHelper {
             switch (commend) {
                 case CMD_ADD_WATER:
                     console.log('加水ing...');
-                    manager.relayHelper.switchPump(action);
+                    manager.liquidLeveHelper.getLeve().then(leve=>{
+                        if(+leve >= 200) {
+                            console.log('水位正常无需添加');
+                        } else {
+                            manager.relayHelper.switchPump(action);
+                        }
+                    }).catch(e=>{
+                        console.log('水位传感器异常');
+                    });
                     break;
                 default:
                     console.log('unknow commend');

@@ -5,7 +5,7 @@ const CMD_ADD_WATER = 'CMD_ADD_WATER';
 
 let config;
 class MqttHelper {
-    init: (conf, manager) {
+    init(conf, manager) {
         console.log('初始化MqttHelper模块');
         if (conf) {
             config = {

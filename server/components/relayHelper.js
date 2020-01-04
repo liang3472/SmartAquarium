@@ -1,7 +1,7 @@
 const rpio = require('rpio');
 const CH1 = 37;
-const CH1 = 38;
-const CH1 = 40;
+const CH2 = 38;
+const CH3 = 40;
 
 rpio.open(CH1, rpio.output, rpio.low);
 rpio.open(CH2, rpio.output, rpio.low);

@@ -3,9 +3,9 @@ const CH1 = 37;
 const CH2 = 38;
 const CH3 = 40;
 
-rpio.open(CH1, rpio.output, rpio.low);
-rpio.open(CH2, rpio.output, rpio.low);
-rpio.open(CH3, rpio.output, rpio.low);
+rpio.open(CH1, rpio.OUTPUT, rpio.LOW);
+rpio.open(CH2, rpio.OUTPUT, rpio.LOW);
+rpio.open(CH3, rpio.OUTPUT, rpio.LOW);
 
 /**
  * 嗡鸣
@@ -21,9 +21,9 @@ class RelayHelper {
      */
     switchPump(flag) {
         if(flag) {
-            rpio.write(CH1, rpio.high);
+            rpio.write(CH1, rpio.HIGH);
         }else {
-            rpio.write(CH1, rpio.low);
+            rpio.write(CH1, rpio.LOW);
         }
     }
 }

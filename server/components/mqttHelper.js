@@ -34,7 +34,6 @@ class MqttHelper {
         });
 
         mqttClient.on('message', (topic, data) => {
-            manager.ledComp.flashGreen();
             let msg = JSON.parse(data.toString());
             switch (msg.commend) {
                 case CMD_ADD_WATER:
@@ -47,7 +46,6 @@ class MqttHelper {
         });
 
         mqttClient.on('connect', () => {
-            manager.ledComp.flashGreen();
             console.log('Connected. Client id is: ' + config.options.clientId);
             mqttClient.subscribe(config.topic);
             console.log('Subscribed to topic: ' + config.topic)

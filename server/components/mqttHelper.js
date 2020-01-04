@@ -6,6 +6,7 @@ const CMD_ADD_WATER = 'CMD_ADD_WATER';
 let config;
 class MqttHelper {
     init(conf, manager) {
+        this.manager = manager;
         console.log('初始化MqttHelper模块');
         if (conf) {
             config = {
@@ -57,26 +58,27 @@ class MqttHelper {
      * 检测水位是否低于200，低于则进行加水操作
      */
     checkLiquidLevel() {
-        manager.liquidLevelHelper.getLevel().then(leve=>{
-            if(+leve >= 200) {
+        this.manager.liquidLevelHelper.getLevel().then(level=>{
+            if(+level >= 200) {
                 console.log('水位正常无需添加');
             } else {
                 this.checkPumpState();
             }
         }).catch(e=>{
+            console.log(e);
             console.log('水位传感器异常');
         });
     }
 
     checkPumpState() {
-        if(manager.relayHelper.isPumpRun()) {
+        if(this.manager.relayHelper.isPumpRun()) {
             console.log('水泵运行中...');
         } else {
             this.startWatchLevel();
-            manager.relayHelper.switchPump(true);
+            this.manager.relayHelper.switchPump(true);
             // 防止加水溢出风险
             setTimeout(()=>{
-                manager.relayHelper.switchPump(false);
+                this.manager.relayHelper.switchPump(false);
             }, 3000);
         }
     }
@@ -84,17 +86,17 @@ class MqttHelper {
     startWatchLevel() {
         console.log('开始监控水位变化');
         let loop = setInterval(() => {
-            let watch = manager.liquidLevelHelper.getLevel().then(level=>{
+            let watch = this.manager.liquidLevelHelper.getLevel().then(level=>{
                 console.log(`当前水位:${level}`);
                 if(+leve >= 300) {
                     console.log('水位超标');
-                    manager.relayHelper.switchPump(false);
+                    this.manager.relayHelper.switchPump(false);
                     clearInterval(watch);
                     console.log('停止监控水位变化');
                 }
             }).catch(e=>{
                 console.log('水位传感器异常');
-                manager.relayHelper.switchPump(false);
+                this.manager.relayHelper.switchPump(false);
                 clearInterval(watch);
                 console.log('停止监控水位变化');
             });

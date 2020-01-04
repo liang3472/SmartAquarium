@@ -19,7 +19,7 @@ class LiquidLeveHelper {
                     if(+data < 0) {
                         reject(new Error('sensor error!'));
                     }
-                    lastLeve = this.mappingLevel(+data);
+                    lastLevel = this.mappingLevel(+data);
                     resolve(lastLevel);
                 });
             } catch(e) {

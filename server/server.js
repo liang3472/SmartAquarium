@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 const fs = require('fs');
 const ini = require('ini');
+const MqttHelper = require('./components/mqttHelper.js');
 const TempHelper = require('./components/tempHelper.js');
+const RelayHelper = require('./components/relayHelper.js');
 const HornHelper = require('./components/hornHelper.js');
 const CmdHelper = require('./components/cmdHelper.js');
 const LiquidLeveHelper = require('./components/liquidLeveHelper.js');
@@ -10,7 +12,9 @@ const LOOP_TIME = 3 * 1000;
 let config;
 
 const manager = {
+    mqttHelper: new MqttHelper(),
     tempHelper: new TempHelper(),
+    relayHelper: new RelayHelper(),
     hornHelper: new HornHelper(),
     cmdHelper: new CmdHelper(),
     liquidLeveHelper: new LiquidLeveHelper()
@@ -21,6 +25,7 @@ fs.exists(configPath, exists => {
     if (exists) {
         console.log('读取配置文件...');
         config = ini.parse(fs.readFileSync('../config.conf', 'utf-8'));
+        manager.mqttHelper.init(config.mqttServer);
         manager.tempHelper.init(config.tempSensorId);
         manager.liquidLeveHelper.init(manager);
     } else {

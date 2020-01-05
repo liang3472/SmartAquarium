@@ -6,7 +6,7 @@ const TempHelper = require('./components/tempHelper.js');
 const RelayHelper = require('./components/relayHelper.js');
 const HornHelper = require('./components/hornHelper.js');
 const CmdHelper = require('./components/cmdHelper.js');
-const LiquidLevelHelper = require('./components/liquidLeveHelper.js');
+const LiquidLevelHelper = require('./components/liquidLevelHelper.js');
 const configPath = '../config.conf';
 const LOOP_TIME = 3 * 1000;
 let config;

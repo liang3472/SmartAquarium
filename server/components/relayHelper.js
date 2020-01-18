@@ -3,9 +3,9 @@ const CH1 = 37;
 const CH2 = 38;
 const CH3 = 40;
 
-rpio.open(CH1, rpio.OUTPUT, rpio.LOW);
-rpio.open(CH2, rpio.OUTPUT, rpio.LOW);
-rpio.open(CH3, rpio.OUTPUT, rpio.LOW);
+rpio.open(CH1, rpio.OUTPUT, rpio.HIGH);
+rpio.open(CH2, rpio.OUTPUT, rpio.HIGH);
+rpio.open(CH3, rpio.OUTPUT, rpio.HIGH);
 
 /**
  * 嗡鸣
@@ -27,10 +27,10 @@ class RelayHelper {
         this._isPumpRun = flag;
         if(flag) {
             console.log('开启水泵');
-            rpio.write(CH1, rpio.HIGH);
+            rpio.write(CH1, rpio.LOW);
         }else {
             console.log('关闭水泵');
-            rpio.write(CH1, rpio.LOW);
+            rpio.write(CH1, rpio.HIGH);
         }
     }
 

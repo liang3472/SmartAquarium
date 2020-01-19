@@ -19,7 +19,7 @@ class RequestHelper {
       level,
       ph,
     }).then(response => {
-      console.log(response);
+      console.log(JSON.parse(response.data));
     }).catch(error => {
       console.log(error);
     });

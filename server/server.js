@@ -7,6 +7,7 @@ const RelayHelper = require('./components/relayHelper.js');
 const HornHelper = require('./components/hornHelper.js');
 const CmdHelper = require('./components/cmdHelper.js');
 const LiquidLevelHelper = require('./components/liquidLevelHelper.js');
+const RequestHelper = require('./components/requestHelper.js');
 const configPath = '../config.conf';
 const LOOP_TIME = 3 * 1000;
 let config;
@@ -17,6 +18,7 @@ const manager = {
     relayHelper: new RelayHelper(),
     hornHelper: new HornHelper(),
     cmdHelper: new CmdHelper(),
+    requestHelper: new RequestHelper(),
     liquidLevelHelper: new LiquidLevelHelper()
 }
 
@@ -27,6 +29,7 @@ fs.exists(configPath, exists => {
         config = ini.parse(fs.readFileSync('../config.conf', 'utf-8'));
         manager.mqttHelper.init(config.mqttServer, manager);
         manager.tempHelper.init(config.tempSensorId);
+        manager.requestHelper.init(config.host);
         manager.liquidLevelHelper.init(manager);
     } else {
         console.log('缺少配置文件');
@@ -37,8 +40,9 @@ setInterval(() => {
     if (manager.tempHelper) {
         let temp = manager.tempHelper.getTemperature();
         console.log(`curr temp ${temp}`);
-        let leve = manager.liquidLevelHelper.getLevel().then(level=>{
-            console.log(`curr leve ${level}`);
+        manager.liquidLevelHelper.getLevel().then(level=>{
+            console.log(`curr level ${level}`);
+            manager.requestHelper.record(temp, level, 7);
         });
         //manager.hornHelper.horn(2, 200, 400); // 测试嗡鸣
     }

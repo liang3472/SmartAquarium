@@ -1,8 +1,8 @@
 let manager;
 let lastLevel = 0;
-class LiquidLeveHelper {
+class LiquidLevelHelper {
     init(mng) {
-        console.log('初始化LiquidLeve模块');
+        console.log('初始化LiquidLevel模块');
         if (mng) {
             manager = mng;
         }
@@ -58,4 +58,4 @@ class LiquidLeveHelper {
     }
 }
 
-module.exports = LiquidLeveHelper;
+module.exports = LiquidLevelHelper;

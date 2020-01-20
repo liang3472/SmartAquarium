@@ -1,0 +1,24 @@
+#!/bin/bash
+
+### BEGIN INIT INFO
+# Provides:smart-aquarium
+# Required-Start:$remote_fs $syslog
+# Required-Stop:$remote_fs $syslog
+# Default-Start:2 3 4 5
+# Default-Stop:0 1 6
+# Short-Description: smart-aquarium
+# Description: This service is used to start my applaction
+### END INIT INFO
+
+case "$1" in
+    start):
+        echo "Starting mygod service"
+        su pi -c "cd /home/pi/mygod/ && npm start >> ./logs/server.log"
+    ;;
+    stop):
+        echo "Stop mygod service"
+        echo "Usage: service mygod start|stop"
+        exit 1 ;;
+esac
+
+exit 0

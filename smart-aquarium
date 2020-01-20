@@ -12,12 +12,12 @@
 
 case "$1" in
     start):
-        echo "Starting mygod service"
-        su pi -c "cd /home/pi/mygod/ && npm start >> ./logs/server.log"
+        echo "Starting smart-aquarium service"
+        su pi -c "cd /home/pi/SmartAquarium/ && npm start >> ./logs/server.log"
     ;;
     stop):
-        echo "Stop mygod service"
-        echo "Usage: service mygod start|stop"
+        echo "Stop smart-aquarium service"
+        echo "Usage: service smart-aquarium start|stop"
         exit 1 ;;
 esac
 

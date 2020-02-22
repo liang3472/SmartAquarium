@@ -59,10 +59,10 @@ class MqttHelper {
      */
     checkLiquidLevel() {
         this.manager.liquidLevelHelper.getLevel().then(level=>{
-            if(+level >= 200) {
+            if(+level >= 300) {
                 console.log('水位正常无需添加');
             } else {
-                this.checkPumpState();
+                this.checkPumpState(+level);
             }
         }).catch(e=>{
             console.log(e);
@@ -70,7 +70,7 @@ class MqttHelper {
         });
     }
 
-    checkPumpState() {
+    checkPumpState(level) {
         if(this.manager.relayHelper.isPumpRun()) {
             console.log('水泵运行中...');
         } else {
@@ -82,7 +82,7 @@ class MqttHelper {
                 console.log('加水超时');
                 this.manager.relayHelper.switchPump(false);
                 this.stopWatchLevel();
-            }, 5000);
+            }, 30 * 1000 * (1 - level / 480));
         }
     }
 

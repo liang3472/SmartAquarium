@@ -9,7 +9,7 @@ const CmdHelper = require('./components/cmdHelper.js');
 const LiquidLevelHelper = require('./components/liquidLevelHelper.js');
 const RequestHelper = require('./components/requestHelper.js');
 const configPath = '../config.conf';
-const LOOP_TIME = 3 * 1000;
+const LOOP_TIME = 60 * 1000;
 let config;
 
 const manager = {
